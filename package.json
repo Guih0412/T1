@@ -1,0 +1,23 @@
+
+{
+  "name": "c4p",
+  "version": "1.0.0",
+  "description": "",
+  "main": "out/app/main.js",
+  "scripts": {
+    "build":"tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm run build && node out/app/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.11.9",
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/prompt-sync": "^4.2.3",
+    "ts-node-dev": "^2.0.0"
+  }
+  
+}
