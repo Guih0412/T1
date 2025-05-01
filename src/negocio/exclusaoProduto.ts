@@ -22,13 +22,24 @@ export default class ExclusaoProduto extends Exclusao {
 
             if (indiceProduto === -1) {
                 console.log("\nProduto não encontrado. Tente novamente.");
+                let opcao = this.entrada.receberTexto("Deseja tentar novamente? (S para sim / N para voltar ao menu): ").toUpperCase();
+
+                if (opcao === "S") {
+                    continue; // Continua pedindo a ID do produto
+                } else if (opcao === "N") {
+                    console.log("\nVoltando ao menu...");
+                    return; // Retorna ao menu
+                } else {
+                    console.log("\nOpção inválida! Voltando ao menu...");
+                    return; // Caso a opção seja inválida, volta ao menu
+                }
             } else {
                 produtoEncontrado = true;
 
                 console.log(`\nExclusão do produto`);
                 console.log("----------");
-                this.produto.splice(indiceProduto, 1);
-                console.log(`Produto excluído com sucesso!`);
+                this.produto.splice(indiceProduto, 1);  // Exclui o produto da lista
+                console.log("Produto excluído com sucesso!");
             }
         }
     }

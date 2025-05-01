@@ -17,8 +17,9 @@ export default class ListagemCliente extends Listagem {
             console.log(`Telefones: ` + cliente.getTelefone.map(tel => `(${tel.getDdd}) ${tel.getNumero}`).join(", "));
 
             console.log(`Seus pets: ` + cliente.getPet.map(pet => pet.getNome).join(", "));
-            console.log(`--------------------------------------`);
+            console.log(`--------------------------------------\n`);
         });
+        
 
     }
 }

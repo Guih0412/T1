@@ -1,0 +1,78 @@
+import Listagem from "./listagem";
+import Cliente from "../modelo/cliente";
+
+export default class ListagemConsumoPorTipoERaca extends Listagem {
+    private clientes: Cliente[];
+
+    constructor(clientes: Cliente[]) {
+        super();
+        this.clientes = clientes;
+    }
+
+    public listar(): void {
+        const consumoPorTipoERaca: {
+            tipo: string,
+            raca: string,
+            item: string,
+            quantidade: number
+        }[] = [];
+
+        this.clientes.forEach(cliente => {
+            cliente.getPet.forEach(pet => {
+                const tipo = pet.getTipo;
+                const raca = pet.getRaca;
+
+                // Produtos consumidos
+                cliente.getProdutoConsumido.forEach(consumo => {
+                    const nomeProduto = consumo.getProduto.getNome;
+                    const quantidade = consumo.getQuantidade;
+
+                    const itemExistente = consumoPorTipoERaca.find(entry =>
+                        entry.tipo === tipo &&
+                        entry.raca === raca &&
+                        entry.item === nomeProduto
+                    );
+
+                    if (itemExistente) {
+                        itemExistente.quantidade += quantidade;
+                    } else {
+                        consumoPorTipoERaca.push({ tipo, raca, item: nomeProduto, quantidade });
+                    }
+                });
+
+                // Serviços consumidos
+                cliente.getServicoConsumido.forEach(consumo => {
+                    const nomeServico = consumo.getServico.getNome;
+                    const quantidade = consumo.getQuantidade;
+
+                    const itemExistente = consumoPorTipoERaca.find(entry =>
+                        entry.tipo === tipo &&
+                        entry.raca === raca &&
+                        entry.item === nomeServico
+                    );
+
+                    if (itemExistente) {
+                        itemExistente.quantidade += quantidade;
+                    } else {
+                        consumoPorTipoERaca.push({ tipo, raca, item: nomeServico, quantidade });
+                    }
+                });
+            });
+        });
+
+        // Ordena por tipo, depois raça, depois quantidade consumida
+        consumoPorTipoERaca.sort((a, b) => {
+            if (a.tipo !== b.tipo) return a.tipo.localeCompare(b.tipo);
+            if (a.raca !== b.raca) return a.raca.localeCompare(b.raca);
+            return b.quantidade - a.quantidade;
+        });
+
+        // Exibe
+        console.log(`\nProdutos e Serviços Mais Consumidos por Tipo e Raça de Pets:`);
+        console.log(`----------------------------------------------------------------`);
+        consumoPorTipoERaca.forEach(entry => {
+            console.log(`Tipo: ${entry.tipo} | Raça: ${entry.raca} | Item: ${entry.item} | Quantidade: ${entry.quantidade}`);
+        });
+        console.log(`----------------------------------------------------------------`);
+    }
+}

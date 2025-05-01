@@ -7,7 +7,7 @@ export default class Produto {
     private estoque: number;
     private consumo: number;
 
-    constructor(id: number, nome: string, preco: number, estoque: number) {
+    constructor(nome: string, preco: number, estoque: number) {
         this.id = GeradorID.gerarIdProduto()
         this.nome = nome
         this.preco = preco

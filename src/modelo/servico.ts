@@ -6,7 +6,7 @@ export default class Servico {
     private preco: number;
     private consumo: number;
 
-    constructor(id: number, nome: string, preco: number) {
+    constructor(nome: string, preco: number) {
         this.id= GeradorID.gerarIdServico()
         this.nome = nome
         this.preco = preco
@@ -42,8 +42,12 @@ export default class Servico {
     }
 
     public registrarConsumo(quantidade: number) {
-        if (quantidade) {
+        if (quantidade>0) {
             this.consumo = this.consumo + quantidade
+            return true
+        }
+        else{
+            return false
         }
     }
 }

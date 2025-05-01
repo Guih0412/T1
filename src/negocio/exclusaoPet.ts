@@ -22,12 +22,23 @@ export default class ExclusaoPet extends Exclusao {
 
             if (!cliente) {
                 console.log("Cliente não encontrado. Tente novamente.");
+                let opcao = this.entrada.receberTexto("Deseja tentar novamente? (S para sim / N para voltar ao menu): ").toUpperCase();
+
+                if (opcao === "S") {
+                    continue; // Continua pedindo o CPF do cliente
+                } else if (opcao === "N") {
+                    console.log("\nVoltando ao menu...");
+                    return; // Retorna ao menu
+                } else {
+                    console.log("\nOpção inválida! Voltando ao menu...");
+                    return; // Caso a opção seja inválida, volta ao menu
+                }
             } else {
                 clienteEncontrado = true;
 
                 // Verifica se o cliente tem pets
                 if (cliente.getPet.length === 0) {
-                    console.log(`O cliente ${cliente.nome} não possui pets.`);
+                    console.log(`O cliente ${cliente.getNome} não possui pets.`);
                     return;
                 } else {
                     // Inicia a exclusão de pet

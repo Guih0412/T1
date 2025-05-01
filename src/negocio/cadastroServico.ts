@@ -20,7 +20,7 @@ export default class CadastroServico extends Cadastro {
         let nome = this.entrada.receberTexto("Por favor insira o nome do serviço: ").trim();
         let preco = this.entrada.receberNumero("Por favor insira o preço do serviço: "); // Corrigido o prompt para mais clareza
 
-        let servico = new Servico(GeradorID.gerarIdServico(), nome, preco);
+        let servico = new Servico(nome, preco);
         this.servico.push(servico);
 
         console.log(`\nServiço cadastrado com sucesso!`);

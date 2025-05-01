@@ -1,102 +1,126 @@
-import CPF from "./cpf"
-import Pet from "./pet"
-import Produto from "./produto"
-import RG from "./rg"
-import Servico from "./servico"
-import Telefone from "./telefone"
+import CPF from "./cpf";
+import Pet from "./pet";
+import Produto from "./produto";
+import RG from "./rg";
+import Servico from "./servico";
+import Telefone from "./telefone";
+import ConsumoProduto from "./consumoProduto";
+import ConsumoServico from "./consumoServico";
 
 export default class Cliente {
-    public nome: string
-    public nomeSocial: string
-    private cpf: CPF
-    private rg: Array<RG>
-    private dataCadastro: Date
-    private telefone: Array<Telefone>
-    private produtoConsumido: Array<Produto>
-    private servicoConsumido: Array<Servico>
-    private pet: Array<Pet>
+    public nome: string;
+    public nomeSocial: string;
+    private cpf: CPF;
+    private rg: Array<RG>;
+    private dataCadastro: Date;
+    private telefone: Array<Telefone>;
+    private produtoConsumido: Array<ConsumoProduto>;
+    private servicoConsumido: Array<ConsumoServico>;
+    private pet: Array<Pet>;
+
     constructor(nome: string, nomeSocial: string, telefone: Array<Telefone>, rg: Array<RG>, cpf: CPF) {
-        this.nome = nome
-        this.nomeSocial = nomeSocial
-        this.cpf = cpf
-        this.rg = rg
-        this.dataCadastro = new Date()
-        this.telefone = telefone
-        this.produtoConsumido = []
-        this.servicoConsumido = []
-        this.pet = []
+        this.nome = nome;
+        this.nomeSocial = nomeSocial;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.dataCadastro = new Date();
+        this.telefone = telefone;
+        this.produtoConsumido = [];
+        this.servicoConsumido = [];
+        this.pet = [];
     }
+
     public get getNome(): string {
-        return this.nome
+        return this.nome;
     }
 
     public get getNomeSocial(): string {
-        return this.nomeSocial
+        return this.nomeSocial;
     }
 
     public get getCpf(): CPF {
-        return this.cpf
+        return this.cpf;
     }
 
     public get getRg(): Array<RG> {
-        return this.rg
+        return this.rg;
     }
 
     public get getDataCadastro(): Date {
-        return this.dataCadastro
+        return this.dataCadastro;
     }
 
     public get getTelefone(): Array<Telefone> {
-        return this.telefone
+        return this.telefone;
     }
 
-    public get getProdutoConsumido(): Array<Produto> {
-        return this.produtoConsumido
+    public get getProdutoConsumido(): Array<ConsumoProduto> {
+        return this.produtoConsumido;
     }
 
-    public get getServicoConsumido(): Array<Servico> {
-        return this.servicoConsumido
+    public get getServicoConsumido(): Array<ConsumoServico> {
+        return this.servicoConsumido;
     }
 
     public get getPet(): Array<Pet> {
-        return this.pet
+        return this.pet;
     }
 
-
-
     public setNome(novoNome: string): void {
-        this.nome = novoNome
+        this.nome = novoNome;
     }
 
     public setNomeSocial(novoNomeSocial: string): void {
-        this.nomeSocial = novoNomeSocial
+        this.nomeSocial = novoNomeSocial;
     }
 
     public setCpf(novoCpf: CPF): void {
-        this.cpf = novoCpf
+        this.cpf = novoCpf;
     }
 
     public setRg(novoRg: Array<RG>): void {
-        this.rg = novoRg
+        this.rg = novoRg;
     }
 
     public setDataCadastro(novoDataCadastro: Date): void {
-        this.dataCadastro = novoDataCadastro
+        this.dataCadastro = novoDataCadastro;
     }
 
     public setTelefone(novoTelefone: Array<Telefone>): void {
-        this.telefone = novoTelefone
+        this.telefone = novoTelefone;
     }
 
-    public setProdutoConsumido(novoProdutoConsumido: Array<Produto>): void {
-        this.produtoConsumido = novoProdutoConsumido
+    public adicionarProdutoConsumido(consumo: ConsumoProduto): void {
+        this.produtoConsumido.push(consumo);
     }
 
-    public setServicoConsumido(novoServicoConsumido: Array<Servico>): void {
-        this.servicoConsumido = novoServicoConsumido
+    public adicionarServicoConsumido(consumo: ConsumoServico): void {
+        this.servicoConsumido.push(consumo);
     }
 
-    public setPet(novoPet: Array<Pet>): void {
-        this.pet = novoPet
+    public adicionarPet(pet: Pet): void {
+        this.pet.push(pet);
+    }
+
+    public calcularTotalProdutosConsumidos(): number {
+        let totalProdutos = 0;
+        for (const consumo of this.produtoConsumido) {
+            totalProdutos += consumo.getValorTotal;
+        }
+        return totalProdutos;
+    }
+
+    public calcularTotalServicosConsumidos(): number {
+        let totalServicos = 0;
+        for (const consumo of this.servicoConsumido) {
+            totalServicos += consumo.getValorTotal;
+        }
+        return totalServicos;
+    }
+
+    public calcularTotalConsumido(): number {
+        const totalProdutos = this.calcularTotalProdutosConsumidos();
+        const totalServicos = this.calcularTotalServicosConsumidos();
+        return totalProdutos + totalServicos;
     }
 }

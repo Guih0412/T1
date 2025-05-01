@@ -22,7 +22,7 @@ export default class CadastroProduto extends Cadastro {
         let estoque = this.entrada.receberNumero("Insira o estoque: ");
 
         // Usando o método correto para gerar ID de Produto
-        let produto = new Produto(GeradorID.gerarIdProduto(), nome, preco, estoque); // Alterado para gerarIdProduto()
+        let produto = new Produto(nome, preco, estoque); // Alterado para gerarIdProduto()
         this.produto.push(produto);
 
         console.log(`\nProduto cadastrado com sucesso!`);

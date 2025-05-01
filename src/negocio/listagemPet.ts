@@ -13,10 +13,9 @@ export default class ListagemPet extends Listagem {
     }
 
     public listar(): void {
-        let opcao = -1;
+        let opcao = 'S';
 
-        while (opcao !== 0) {
-            // Primeiramente, lista todos os pets de todos os clientes
+        while (opcao !== 'N') {
             console.log("\nLista de todos os Pets");
             console.log(`--------------------------------------`);
             this.cliente.forEach(cliente => {
@@ -31,21 +30,24 @@ export default class ListagemPet extends Listagem {
                 });
             });
 
-            // Depois de listar todos, pede o CPF do cliente
-            let cpfCliente = this.entrada.receberTexto(`\nInsira o CPF do cliente para listar seus pets: \n`);
+            let cpfCliente = this.entrada.receberTexto(`\nInsira o CPF do cliente para listar seus pets ou 0 para voltar ao menu: `);
 
-
+            if (cpfCliente === '0') {
+                console.log("\nVoltando ao menu...");
+                return; // Sai da função e volta ao menu
+            }
 
             // Encontra o cliente com o CPF informado
             let clienteEncontrado = this.cliente.find(cliente => cliente.getCpf.getValor === cpfCliente);
+
             if (!clienteEncontrado) {
-                console.log("CPF do cliente não encontrado.");
-                continue; // Continua a execução, pedindo o CPF novamente
+                console.log("CPF do cliente não encontrado. Tente novamente ou digite 0 para voltar.");
+                continue; // Se o CPF não for encontrado, o sistema solicita um novo CPF
             }
 
             // Se o cliente não tem pets
             if (clienteEncontrado.getPet.length === 0) {
-                console.log(`O cliente não possui pets.`);
+                console.log(`O cliente ${clienteEncontrado.getNome} não possui pets.`);
             } else {
                 // Lista os pets desse cliente específico
                 console.log(`\nLista dos pets do cliente ${clienteEncontrado.getNome}:`);
@@ -58,6 +60,15 @@ export default class ListagemPet extends Listagem {
                     console.log(`Tipo: ${pet.getTipo}`);
                     console.log(`--------------------------------------`);
                 });
+            }
+
+            // Pergunta ao usuário se deseja continuar ou voltar
+            opcao = this.entrada.receberTexto("\nDeseja continuar listando pets? (S/N): ").toUpperCase();
+
+            if (opcao === 'N') {
+                console.log("\nVoltando ao menu...");
+            } else if (opcao !== 'S') {
+                console.log("\nOpção inválida. Por favor, digite 'S' para continuar ou 'N' para voltar ao menu.");
             }
         }
     }

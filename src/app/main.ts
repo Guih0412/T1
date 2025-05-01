@@ -17,9 +17,15 @@ import ExclusaoProduto from "../negocio/exclusaoProduto";
 import ExclusaoServico from "../negocio/exclusaoServico";
 
 import ListagemCliente from "../negocio/listagemClientes";
+import ListagemTop10ClientesMaisConsumiram from "../negocio/listagemClientesMaisConsumiram";
+import ListagemTop5ClientesMaisConsumiramValor from "../negocio/listagemClientesMaisGastaram"; // 
 import ListagemPet from "../negocio/listagemPet";
 import ListagemProduto from "../negocio/listagemProduto";
 import ListagemServico from "../negocio/listagemServico";
+
+import Registro from "../negocio/registro";
+import RegistroConsumoProduto from "../negocio/registroConsumoProduto";
+import RegistroConsumoServico from "../negocio/registroConsumoServico";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinárias!\n`);
 const empresa = new Empresa();
@@ -45,8 +51,10 @@ while (execucao) {
             console.log(`\n----- Menu de Clientes ----`);
             console.log(`1- Cadastrar`);
             console.log(`2- Listar`);
-            console.log(`3- Editar`);
-            console.log(`4- Excluir`);
+            console.log("3- Listar os clientes que mais consumiram");
+            console.log("4- Listar os clientes que mais gastaram");
+            console.log(`5- Editar`);
+            console.log(`6- Excluir`);
             console.log(`0- Voltar\n`);
 
             entrada = new Entrada();
@@ -66,11 +74,21 @@ while (execucao) {
                     break;
                 }
                 case 3: {
+                    const listagemTop10ClientesMaisConsumiram = new ListagemTop10ClientesMaisConsumiram(empresa.getCliente);
+                    listagemTop10ClientesMaisConsumiram.listar();
+                    break;
+                }
+                case 4: { // Opção para listar os clientes que mais gastaram
+                    const listagemTop5ClientesMaisConsumiramValor = new ListagemTop5ClientesMaisConsumiramValor(empresa.getCliente);
+                    listagemTop5ClientesMaisConsumiramValor.listar();
+                    break;
+                }
+                case 5: {
                     const clienteAtualizacao = new AtualizacaoCliente(empresa.getCliente);
                     clienteAtualizacao.atualizar();
                     break;
                 }
-                case 4: {
+                case 6: {
                     const clienteExclusao = new ExclusaoCliente(empresa.getCliente);
                     clienteExclusao.excluir();
                     break;
@@ -124,9 +142,12 @@ while (execucao) {
         case 3: {
             console.log(`\n----- Menu de Produtos ----`);
             console.log(`1- Cadastrar`);
-            console.log(`2- Listar`);
-            console.log(`3- Editar`);
-            console.log(`4- Excluir`);
+            console.log("2- Comprar");
+            console.log(`3- Listar`);
+            console.log(`4- Listar os produtos mais consumidos`);
+            console.log(`5- Listar os produtos mais consumidos por tipos e raças de pet`);
+            console.log(`6- Editar`);
+            console.log(`7- Excluir`);
             console.log(`0- Voltar\n`);
 
             entrada = new Entrada();
@@ -141,16 +162,21 @@ while (execucao) {
                     break;
                 }
                 case 2: {
+                    const produtoCompra = new RegistroConsumoProduto(empresa.getCliente, empresa.getProduto);
+                    produtoCompra.registrar();
+                    break;
+                }
+                case 3: {
                     const produtoListagem = new ListagemProduto(empresa.getProduto);
                     produtoListagem.listar();
                     break;
                 }
-                case 3: {
+                case 6: {
                     const produtoAtualizacao = new AtualizacaoProduto(empresa.getProduto);
                     produtoAtualizacao.atualizar();
                     break;
                 }
-                case 4: {
+                case 7: {
                     const produtoExclusao = new ExclusaoProduto(empresa.getProduto);
                     produtoExclusao.excluir();
                     break;
@@ -164,9 +190,12 @@ while (execucao) {
         case 4: {
             console.log(`\n----- Menu de Serviços ----`);
             console.log(`1- Cadastrar`);
-            console.log(`2- Listar`);
-            console.log(`3- Editar`);
-            console.log(`4- Excluir`);
+            console.log(`2- Adquirir`);
+            console.log(`3- Listar`);
+            console.log(`4- Listar os serviços mais consumidos`);
+            console.log(`5- Listar os serviços mais consumidos por tipos e raças de pet`);
+            console.log(`6- Editar`);
+            console.log(`7- Excluir`);
             console.log(`0- Voltar\n`);
 
             entrada = new Entrada();
@@ -181,16 +210,21 @@ while (execucao) {
                     break;
                 }
                 case 2: {
+                    const servicoCompra = new RegistroConsumoServico(empresa.getCliente, empresa.getServico);
+                    servicoCompra.registrar();
+                    break;
+                }
+                case 3: {
                     const servicoListagem = new ListagemServico(empresa.getServico);
                     servicoListagem.listar();
                     break;
                 }
-                case 3: {
+                case 6: {
                     const servicoAtualizacao = new AtualizacaoServico(empresa.getServico);
                     servicoAtualizacao.atualizar();
                     break;
                 }
-                case 4: {
+                case 7: {
                     const servicoExclusao = new ExclusaoServico(empresa.getServico);
                     servicoExclusao.excluir();
                     break;
