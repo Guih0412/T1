@@ -34,7 +34,7 @@
 
 ## Como rodar o projeto?
 
-1. **Clonar o repositório**: execute o comando `git clone <url-do-repositorio>`
+1. **Clonar o repositório**: execute o comando `git clone https://github.com/Guih0412/T1.git`
 2. **Instale as dependências**: excute o comando `npm install`
 3. **Compile o código TypeScript para JavaScript**: execute o comando `npm run build`
 4. **Rode o projeto**: execute o comando `npm run dev` toda vez que fizer alguma atualização no código.
